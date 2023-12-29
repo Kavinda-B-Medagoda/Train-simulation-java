@@ -1,5 +1,9 @@
 package org.example;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class StationGraph {
     private int numberOfStations;
     private int[][] stationGraph;
@@ -34,6 +38,16 @@ public class StationGraph {
         return stationGraph[sourceStation][destinationStation];
     }
 
+    public ArrayList getConnections(int src){
+        ArrayList connections = new ArrayList();
+        for (int i=0; i<numberOfStations; i++){
+            if (stationGraph[src][i] != 0){
+                connections.add(i);
+            }
+        }
+        return connections;
+    }
+
     public void displayGraph() {
         System.out.println("Train Station Graph (Adjacency Matrix):");
         for (int i = 0; i < numberOfStations; i++) {
@@ -44,6 +58,29 @@ public class StationGraph {
             System.out.println();
         }
     }
+
+
+    public void BFS(int start) {
+        boolean[] visited = new boolean[numberOfStations];
+        Queue<Integer> queue = new LinkedList<>();
+
+        visited[start] = true;
+        queue.add(start);
+
+        while (!queue.isEmpty()) {
+            int current = queue.poll();
+            System.out.print(current + " ");
+
+            ArrayList<Integer> connections = getConnections(current);
+            for (int neighbor : connections) {
+                if (!visited[neighbor]) {
+                    visited[neighbor] = true;
+                    queue.add(neighbor);
+                }
+            }
+        }
+    }
+
 
 }
 

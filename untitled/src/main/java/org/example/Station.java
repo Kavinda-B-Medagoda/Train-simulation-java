@@ -8,8 +8,8 @@ public class Station {
     float distance;
     ArrayList<String> stationList = new ArrayList<>();
 
-    public Station(int stationCode,String stationName, float distance, ArrayList<String> stationList) {
-        this.stationName = stationName;
+    public Station(int stationCode, float distance, ArrayList<String> stationList) {
+
         this.stationCode = stationCode;
         this.distance = distance;
         this.stationList = stationList;
@@ -42,11 +42,10 @@ public class Station {
 
     @Override
     public String toString() {
-        return "Station{"+
-                "station Name=" + stationName +
-                ", stationCode=" + stationCode +
+        return
+                "stationCode=" + stationCode +
                 ", distance=" + distance +
-                ", stationList=" + stationList +
-                '}';
+                ", stationList=" + stationList
+                ;
     }
 }
