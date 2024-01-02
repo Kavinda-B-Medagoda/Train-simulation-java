@@ -44,6 +44,18 @@ public class DLinkedList {
         }
     }
 
+    public boolean contains(Station targetStation) {
+        Node current = head;
+        while (current != null) {
+            if (current.station == targetStation) {
+                return true;
+            }
+            current = current.next;
+        }
+        return false;
+    }
+
+
     public void display(){
         Node current = head;
         while (current != null){

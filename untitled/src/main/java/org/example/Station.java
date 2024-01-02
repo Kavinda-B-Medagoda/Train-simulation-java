@@ -15,6 +15,8 @@ public class Station {
         this.stationList = stationList;
     }
 
+
+
     public int getStationCode() {
         return stationCode;
     }
