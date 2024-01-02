@@ -3,7 +3,6 @@ package org.example;
 import java.util.ArrayList;
 
 public class Station {
-    String stationName;
     int stationCode;
     float distance;
     ArrayList<String> stationList = new ArrayList<>();

@@ -43,6 +43,9 @@ public class Main {
             passengerQueue.addPassengers(1, "naveen");
             passengerQueue.addPassengers(1, "bathiya");
 
+            LinkedList<String> schedule1 = new LinkedList<>(Arrays.asList("0", "6", "3"));
+            LinkedList<String> schedule2 = new LinkedList<>(Arrays.asList("1", "2", "6", "3"));
+
             int userInput;
             scanner = new Scanner(System.in);
 
@@ -51,7 +54,7 @@ public class Main {
                 System.out.println("1. view train graph");
                 System.out.println("2. view all stations");
                 System.out.println("3. view shortest path from given station");
-                System.out.println("4. view shortest path amon two stations");
+                System.out.println("4. view shortest path among two stations");
                 System.out.println("5. view train schedule");
                 System.out.println("6. view train priority");
                 System.out.println("7. search a station in a path");
@@ -61,10 +64,6 @@ public class Main {
                 System.out.printf("Enter your choice: ");
                 userInput = scanner.nextInt();
                 scanner.nextLine();
-
-
-                LinkedList<String> schedule1 = new LinkedList<>(Arrays.asList("0", "6", "3"));
-                LinkedList<String> schedule2 = new LinkedList<>(Arrays.asList("1", "2", "6", "3"));
 
                 switch (userInput) {
                     case 1:
@@ -156,14 +155,14 @@ public class Main {
         int numberOfStations = stationGraph.getNumberOfStations();
         int[][] graph = stationGraph.getStationGraph();
 
-        int[] distance = new int[numberOfStations];
-        Arrays.fill(distance, Integer.MAX_VALUE);
-        distance[sourceStation] = 0;
+        int[] distance = new int[numberOfStations]; //array that contains distances to each station
+        Arrays.fill(distance, Integer.MAX_VALUE); //fill all distances to max value
+        distance[sourceStation] = 0; //starting distance 0 for starting station
 
         PriorityQueue<StationDistance> priorityQueue = new PriorityQueue<>();
         priorityQueue.offer(new StationDistance(sourceStation, 0, new ArrayList<>(Arrays.asList(sourceStation))));
 
-        Map<Integer, DijkstraResult> results = new HashMap<>();
+        Map<Integer, DijkstraResult> results = new HashMap<>(); //final map that contains station code and shortest distance and shortest path
 
         while (!priorityQueue.isEmpty()) {
             StationDistance current = priorityQueue.poll();
@@ -172,13 +171,13 @@ public class Main {
             for (int neighbor = 0; neighbor < numberOfStations; neighbor++) {
                 int edgeDistance = graph[currentStation][neighbor];
 
-                if (edgeDistance > 0 && distance[currentStation] + edgeDistance < distance[neighbor]) {
+                if (edgeDistance > 0 && distance[currentStation] + edgeDistance < distance[neighbor]) { //check whether the current distance to neighbor is less or greater than new distance
                     List<Integer> path = new ArrayList<>(current.getPath());
                     path.add(neighbor);
                     distance[neighbor] = distance[currentStation] + edgeDistance;
                     priorityQueue.offer(new StationDistance(neighbor, distance[neighbor], path));
 
-                    // Update results with the current path
+                    // Update results map, put the station code and shortest path and the destination
                     results.put(neighbor, new DijkstraResult(distance[neighbor], path));
                 }
             }
@@ -216,7 +215,7 @@ public class Main {
         }
     }
 
-    private static class DijkstraResult {
+    private static class DijkstraResult { //this class creates object that have the shortest distance from the src station to destination station and path
         private int distance;
         private List<Integer> path;
 
