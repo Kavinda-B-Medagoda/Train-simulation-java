@@ -2,13 +2,13 @@ package org.example;
 
 import java.util.*;
 import java.util.logging.Logger;
-public class PassengerQueue {
+public class PassengerQueue implements Constants {
 
     private final static Logger logger = Logger.getLogger(PassengerQueue.class.getName());
     Map<Integer, Queue<String >> passengerQueues = new HashMap<>();
 
     public PassengerQueue() {
-        for (int i = 0; i<6; i++){
+        for (int i = 0; i< numberOfStations; i++){
             Queue<String> passengers = new LinkedList<>();
             passengerQueues.put(i,passengers);
         }

@@ -129,7 +129,7 @@ public class Main {
                     case 7:
                         System.out.printf("Enter the starting station: ");
                         int searchStart = scanner.nextInt();
-                        stationGraph.BFS(searchStart);
+                        stationGraph.breadthFirstSearch(searchStart);
                         break;
 
                     case 8:

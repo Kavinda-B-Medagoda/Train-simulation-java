@@ -60,7 +60,7 @@ public class StationGraph {
     }
 
 
-    public void BFS(int start) {
+    public void breadthFirstSearch(int start) {
         boolean[] visited = new boolean[numberOfStations];
         Queue<Integer> queue = new LinkedList<>();
 
