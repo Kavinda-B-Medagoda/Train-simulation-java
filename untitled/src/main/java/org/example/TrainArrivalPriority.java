@@ -1,34 +1,36 @@
 package org.example;
 
-import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.PriorityQueue;
 import java.util.logging.Logger;
 
 public class TrainArrivalPriority {
 
     private static final Logger logger = Logger.getLogger(TrainArrivalPriority.class.getName());
-    private PriorityQueue<Train> trainArrivalQueue;
+    private List<Train> trainArrivalQueue;
 
-    public PriorityQueue<Train> getTrainArrivalQueue() {
+    public List<Train> getTrainArrivalQueue() {
         return trainArrivalQueue;
     }
 
     public TrainArrivalPriority() {
-        trainArrivalQueue = new PriorityQueue<>(Comparator.comparingInt(train -> train.priority));
+        trainArrivalQueue = new LinkedList<>();
     }
 
     public void enqueueTrain(String trainName, int priority, LinkedList schedule) {
         Train train = new Train(trainName, priority, schedule);
-        trainArrivalQueue.offer(train);
+        int index = 0;
+        while (index < trainArrivalQueue.size() && train.priority >= trainArrivalQueue.get(index).priority) {
+            index++;
+        }
+        trainArrivalQueue.add(index, train);
         logger.info("Train Enqueued: " + train);
     }
 
     public void dequeueTrains() {
         logger.info("Dequeueing and displaying trains in order of priority:");
         while (!trainArrivalQueue.isEmpty()) {
-            Train nextTrain = trainArrivalQueue.poll();
+            Train nextTrain = trainArrivalQueue.remove(0);
             logger.info("Train Arrived: " + nextTrain);
         }
     }

@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 public class PassengerQueue implements Constants {
 
     private final static Logger logger = Logger.getLogger(PassengerQueue.class.getName());
-    Map<Integer, Queue<String >> passengerQueues = new HashMap<>();
+    public static Map<Integer, Queue<String >> passengerQueues = new HashMap<>();
 
     public PassengerQueue() {
         for (int i = 0; i< numberOfStations; i++){
